@@ -1,36 +1,61 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { useWorkoutsContext } from '../hooks/useWorkoutContext';
+import { Filter } from 'react-bootstrap-icons'
+
+// Import of Components
 import WorkoutDetails from '../components/WorkoutDetails';
 import WorkoutForm from '../components/WorkoutForm';
 
+const baseURL = import.meta.env.VITE_API_BASE_URL
+
 const Home = () => {
-    const [workouts, setWorkouts] = useState(null);
+  const {workouts, dispatch} = useWorkoutsContext()
+  const [myWorkouts, setMyWorkouts] = useState(null)
 
-    useEffect(() => {
-        const fetchWorkouts = async () => {
-            const response = await axios.get('http://localhost:4000/api/workouts/')
-            // console.log(response.data);
-            if (response.status === 200) {
-                setWorkouts(response.data)
-            }
+  useEffect(() => {
+      const fetchWorkouts = async () => {
+          const response = await axios.get(`${baseURL}/api/workouts/`);
+          // console.log(response.data);
+          if (response.status === 200) {
+              dispatch({type: 'SET_WORKOUTS', payload: response.data})
+          }
+      }
 
+      fetchWorkouts();
+  }, []);
+
+const handleMyWorkouts = () => {
+  setMyWorkouts(true)
+}
+
+const handleAllWorkouts = () => {
+  setMyWorkouts(null)
+}
+
+return (
+  <div className='home'>
+    <div className='workouts'>
+      <button onClick={handleMyWorkouts} className='filterButton'><Filter/>My Workouts</button>
+      <button onClick={handleAllWorkouts} className='filterButton'><Filter/>All Workouts</button>
+      {myWorkouts ? (workouts && workouts.map((workout) => {
+        const user = JSON.parse(localStorage.getItem('user'))
+        const user_id = user.email
+        if (workout.user_id === user_id) {
+          return (
+              <WorkoutDetails key={workout._id} workout={workout}/>
+          )
         }
-
-        fetchWorkouts();
-    }, []);
-
-  return (
-    <div className='home'>
-        <div className='workouts'>
-            {workouts && workouts.map((workout) => {
-                return (
-                    <WorkoutDetails key={workout._id} workout={workout}/>
-                )
-            })}
-        </div>
-        <WorkoutForm></WorkoutForm>
+      })) : (workouts && workouts.map((workout) => {
+        return (
+            <WorkoutDetails key={workout._id} workout={workout}/>
+        )
+      })
+    )}
     </div>
-  )
+    <WorkoutForm/>
+  </div>
+)
 }
 
 export default Home

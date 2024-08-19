@@ -9,7 +9,7 @@
 
 /* Layout */
 :root {
-  --primary: rgb(44, 179, 26);
+  --primary: rgb(233, 79, 164);
   --error: rgb(189, 44, 44);
 }
 
@@ -47,7 +47,7 @@ header a {
 .home {
   display: grid;
   grid-template-columns: 3fr 1fr;
-  gap: 100px;
+  gap: 50px;
 }
 
 .workout-details {
@@ -57,6 +57,7 @@ header a {
   padding: 20px;
   position: relative;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+  border: solid 1px rgb(233, 79, 164);
 }
 
 .workout-details h4 {
@@ -66,13 +67,17 @@ header a {
 }
 
 .workout-details p {
-  margin: 0;
+  margin-bottom: 5px;
   font-size: 0.9em;
 }
 
 /* new workout form */
 label, input {
   display: block;
+}
+
+.create {
+  padding: 10px;
 }
 
 input {
@@ -83,6 +88,10 @@ input {
   border: 1px solid white;
   border-radius: 8px;
   box-sizing: border-box;
+}
+
+h3, label {
+  margin-top: 10px;
 }
 
 form button {
@@ -102,4 +111,140 @@ div.error {
   color: var(--error);
   border-radius: 8px;
   margin: 20px 0;
+}
+
+.icon {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 1.5em;
+  background-color: var(--primary) ;
+  padding: 8px;
+  border-radius: 30%;
+  display: flex;
+}
+
+.edit-icon {
+  right: 80px;
+}
+
+.delete-icon {
+  right: 20px;
+}
+
+.saveButton,
+.cancelButton,
+.logoutButton,
+.filterButton,
+.secondaryButton,
+.backButton,
+.commentButton,
+.submitButton{
+  color: white;
+  padding: 10px 20px;
+  margin-right: 20px;
+  font-family: 'Lato';
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.saveButton,
+.backButton,
+.submitButton {
+  background: var(--primary);
+  border: 0;
+  
+}
+
+.submitButton {
+  margin-top: 15px;
+}
+
+
+.backButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.9em;
+  span {
+    font-size: 2.5em;
+  }
+}
+
+
+.cancelButton,
+.logoutButton,
+.filterButton,
+.secondaryButton,
+.commentButton {
+  border: solid 1px rgb(233, 79, 164);
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.secondaryButton {
+  margin-top: 10px;
+}
+
+.userEmail {
+  margin: 0 40px;
+}
+
+/* navbar */
+nav {
+  display: flex;
+  align-items: center;
+}
+
+nav a {
+  margin-left: 10px;
+}
+
+/* auth forms */
+form.signup, form.login {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #333;
+  border-radius: 8px;
+}
+
+.add-comment {
+  border: 3px solid var(--primary);
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 15px;
+}
+.add-comment label {
+  margin-top: 10px;
+}
+
+.add-comment input {
+  margin-bottom: 0;
+}
+
+.comment {
+  border: 3px solid var(--primary);
+  border-radius: 10px;
+  margin: 15px 0;
+  padding: 10px;
+}
+.comments h5 {
+  color: var(--primary);
+  margin-bottom: 5px;
+  font-size: 1em;
+  font-weight: 900;
+}
+
+.comments span {
+  font-size: 0.75em !important;
+}
+
+/* workout image */
+.workout-image {
+  width: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+  margin-top: 15px;
+  margin-bottom: 10px;
 }
