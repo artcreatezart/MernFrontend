@@ -153,13 +153,18 @@ const WorkoutDetails = ({workout}) => {
           <p><strong>Created by: </strong>{getEmailCharactersBeforeAtSymbol(workout.user_id)}</p>
           <button onClick={handleNavigate} className='secondaryButton'>Read More</button>
 
-          {/* Delete/Edit Buttons */}
-          <span onClick={handleEdit} className='delete-icon icon'>
-            <Pen/>
-          </span>
-          <span onClick={handleDelete} className='edit-icon icon'>
-            <Trash/>
-          </span>
+          {workout.user_id === user_id && (
+            <>
+              {/* Delete/Edit Buttons */}
+              <span onClick={handleEdit} className='delete-icon icon'>
+                <Pen/>
+              </span>
+              <span onClick={handleDelete} className='edit-icon icon'>
+                <Trash/>
+              </span>
+            </>
+          )}
+
         </>
       )}
       <button
